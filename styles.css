@@ -677,6 +677,15 @@ a {
     font-size: 1.05rem;
 }
 
+.feature-copy-wide {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.feature-copy-wide > p {
+    max-width: 760px;
+}
+
 .fact-row {
     margin-top: 34px;
     padding-top: 24px;
