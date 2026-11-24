@@ -1,156 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anonsec</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #0f172a;
-            --accent: #3b82f6;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --white: #ffffff;
-            --shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--light); color: var(--secondary); line-height: 1.6; }
-
-        /* Navigation */
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--secondary); font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
-
-        /* Hero Section */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 5% 4rem; position: relative; overflow: hidden; }
-        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(37,99,235,0.9) 0%, rgba(118,75,162,0.9) 100%); z-index: -1; }
-        .hero-content { text-align: center; color: var(--white); z-index: 1; max-width: 800px; }
-        .hero-image { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 6px solid rgba(255,255,255,0.4); }
-        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .hero-content .title { font-size: 1.5rem; opacity: 0.95; margin-bottom: 1rem; }
-        .hero-content .bio { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .btn-primary { background: var(--white); color: var(--primary); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .btn-outline { border: 2px solid var(--white); color: var(--white); }
-        .btn-outline:hover { background: var(--white); color: var(--primary); }
-
-        /* Page Header */
-        .page-header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); padding: 8rem 5% 4rem; text-align: center; }
-        .page-header h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-        .page-header p { font-size: 1.1rem; opacity: 0.9; }
-
-        /* Section */
-        section { padding: 5rem 5%; }
-        .section-title { text-align: center; margin-bottom: 3rem; }
-        .section-title h2 { font-size: 2.5rem; color: var(--secondary); margin-bottom: 0.5rem; position: relative; display: inline-block; }
-        .section-title h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
-        .section-title p { color: var(--gray); max-width: 600px; margin: 1rem auto 0; }
-
-        /* Quick Links */
-        .quick-links { background: var(--white); }
-        .quick-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .quick-link-card { background: var(--light); padding: 2.5rem 2rem; border-radius: 20px; text-decoration: none; color: var(--secondary); text-align: center; transition: 0.3s; }
-        .quick-link-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
-        .quick-link-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
-        .quick-link-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .quick-link-card p { color: var(--gray); font-size: 0.9rem; }
-
-        /* Footer */
-        footer { background: var(--secondary); color: var(--white); padding: 2rem 5%; text-align: center; }
-        .social-links { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
-        .social-links a { width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
-        .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
-        footer p { opacity: 0.7; font-size: 0.9rem; }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-            .nav-links.active { display: flex; }
-            .menu-toggle { display: block; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content .title { font-size: 1.2rem; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cybersecurity portfolio of Anik Banerjee, focused on web security, penetration testing, Linux, and networking.">
+    <meta name="theme-color" content="#07110f">
+    <title>Anik Banerjee | Cybersecurity Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo">Anik.Info</a>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="certifications.html">Certifications</a></li>
-            <li><a href="Education.html">Education</a></li>
-        
-        </ul>
-        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-    </nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="nav-shell" aria-label="Main navigation">
+            <a class="brand" href="index.html" aria-label="Anik Banerjee home">
+                <span class="brand-mark" aria-hidden="true"></span>
+                Anik<span>.sec</span>
+            </a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation"><span></span></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section class="hero">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="videoanik.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-        
-        <div class="hero-content">
-            <h1>What you want to know?</h1>
-        
-        </div>
-    </section>
+    <main id="main-content">
+        <div class="page-shell">
+            <section class="hero">
+                <div class="hero-copy" data-reveal>
+                    <span class="eyebrow">Cybersecurity portfolio</span>
+                    <h1>Think like an <span>adversary.</span></h1>
+                    <p>I am Anik Banerjee, a cybersecurity student focused on web application security, penetration testing, Linux, and network defense.</p>
+                    <div class="hero-actions">
+                        <a class="button" href="skills.html">Explore my skills <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        <a class="button secondary" href="contact.html">Start a conversation</a>
+                    </div>
+                </div>
 
-    <section class="quick-links">
-        <div class="section-title">
-            <h2>Explore</h2>
-            <p>Discover more about me</p>
+                <div class="hero-visual" data-reveal>
+                    <span class="status-chip">Learning in public</span>
+                    <div class="media-frame">
+                        <img src="anikimg.jpeg" alt="Anik Banerjee working toward a career in cybersecurity" width="700" height="875">
+                    </div>
+                    <div class="terminal-card">
+                        <div class="terminal-top">
+                            <span>anik@security:~</span>
+                            <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        </div>
+                        <p class="terminal-line"><strong>$</strong> whoami</p>
+                        <p class="terminal-line">cybersecurity_student</p>
+                        <p class="terminal-line"><strong>$</strong> current_focus</p>
+                        <p class="terminal-line">web_vapt / networks / linux</p>
+                        <p class="terminal-line"><strong>$</strong> status: ready_to_learn</p>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="quick-links-grid">
-            <a href="about.html" class="quick-link-card">
-                <i class="fas fa-user"></i>
-                <h3>About Me</h3>
-                <p>Learn more about who I am</p>
-            </a>
-            <a href="skills.html" class="quick-link-card">
-                <i class="fas fa-code"></i>
-                <h3>Skills</h3>
-                <p>My technical expertise</p>
-            </a>
-            <a href="certifications.html" class="quick-link-card">
-                <i class="fas fa-certificate"></i>
-                <h3>Certifications</h3>
-                <p>My certifications</p>
-            </a>
-            <a href="Education.html" class="quick-link-card">
-                <i class="fas fa-graduation-cap"></i>
-                <h3>Education</h3>
-                <p>My academic journey</p>
-            </a>
-        </div>
-    </section>
 
-    <footer>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+        <section class="section">
+            <div class="page-shell">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <span class="eyebrow">Core disciplines</span>
+                        <h2>Where I focus.</h2>
+                    </div>
+                    <p>A growing security practice built through hands-on labs, CTF challenges, technical study, and continuous experimentation.</p>
+                </div>
+                <div class="expertise-list" data-reveal>
+                    <article class="expertise-item">
+                        <span class="item-number">01</span>
+                        <h3>Web Security</h3>
+                        <p>Testing applications for common vulnerabilities and understanding how secure design prevents them.</p>
+                        <span class="item-arrow" aria-hidden="true">&nearr;</span>
+                    </article>
+                    <article class="expertise-item">
+                        <span class="item-number">02</span>
+                        <h3>Penetration Testing</h3>
+                        <p>Methodical reconnaissance, vulnerability validation, documentation, and responsible reporting.</p>
+                        <span class="item-arrow" aria-hidden="true">&nearr;</span>
+                    </article>
+                    <article class="expertise-item">
+                        <span class="item-number">03</span>
+                        <h3>Network Security</h3>
+                        <p>Exploring protocols, segmentation, traffic analysis, and the fundamentals of defensive networking.</p>
+                        <span class="item-arrow" aria-hidden="true">&nearr;</span>
+                    </article>
+                    <article class="expertise-item">
+                        <span class="item-number">04</span>
+                        <h3>Linux Systems</h3>
+                        <p>Working in Linux environments with command-line tooling, scripting, and system administration.</p>
+                        <span class="item-arrow" aria-hidden="true">&nearr;</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="page-shell split-feature">
+                <div class="portrait-frame" data-reveal>
+                    <img src="anikimg.jpeg" alt="Portrait of Anik Banerjee" width="700" height="875">
+                </div>
+                <div class="feature-copy" data-reveal>
+                    <span class="eyebrow">Beyond the terminal</span>
+                    <h2>Curious, practical, and always learning.</h2>
+                    <p>I enjoy connecting technical security with real business needs. CTFs, hackathons, and practical labs help me turn theory into repeatable problem-solving skills.</p>
+                    <div class="fact-row">
+                        <div class="fact"><strong>Based in</strong><span>West Bengal, India</span></div>
+                        <div class="fact"><strong>Studying</strong><span>Networking &amp; Cybersecurity</span></div>
+                        <div class="fact"><strong>Interested in</strong><span>Security opportunities</span></div>
+                    </div>
+                    <div class="button-row">
+                        <a class="button secondary" href="about.html">More about me <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="page-shell">
+                <div class="cta-strip" data-reveal>
+                    <h2>Have a security project or opportunity in mind?</h2>
+                    <a class="button secondary" href="mailto:banerjeeanik888@gmail.com">Email me <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-shell">
+            <p>&copy; <span data-year></span> Anik Banerjee. Built with intent.</p>
+            <div class="footer-links">
+                <a href="https://github.com/spideyanik" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:banerjeeanik888@gmail.com">Email</a>
+                <a href="#main-content">Back to top</a>
+            </div>
         </div>
-        <p>&copy; 2024 Anik Banerjee. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.querySelector('.menu-toggle').addEventListener('click', () => {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-    </script>
 </body>
 </html>
