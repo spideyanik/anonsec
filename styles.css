@@ -1159,6 +1159,12 @@ a {
     margin-top: 24px;
 }
 
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+}
+
 .availability {
     margin-top: 18px;
     display: flex;
