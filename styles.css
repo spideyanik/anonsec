@@ -358,8 +358,10 @@ a {
 
 .hero-visual {
     position: relative;
-    align-self: stretch;
-    min-height: 530px;
+    width: min(100%, 410px);
+    aspect-ratio: 290 / 388;
+    align-self: center;
+    justify-self: end;
 }
 
 .media-frame {
@@ -637,7 +639,7 @@ a {
 
 .portrait-frame {
     position: relative;
-    max-width: 460px;
+    max-width: 390px;
     padding: 18px 18px 0 0;
 }
 
@@ -656,7 +658,7 @@ a {
     position: relative;
     z-index: 1;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 290 / 388;
     border-radius: var(--radius);
     object-fit: cover;
     filter: saturate(0.78) contrast(1.03);
@@ -1296,7 +1298,8 @@ a {
     }
 
     .hero-visual {
-        min-height: 570px;
+        min-height: 0;
+        justify-self: center;
     }
 
     .media-frame {
@@ -1373,7 +1376,8 @@ a {
     }
 
     .hero-visual {
-        min-height: 490px;
+        width: min(100% - 12px, 360px);
+        min-height: 0;
     }
 
     .media-frame {
