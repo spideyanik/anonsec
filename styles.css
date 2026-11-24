@@ -639,19 +639,17 @@ a {
 
 .portrait-frame {
     position: relative;
-    max-width: 390px;
-    padding: 18px 18px 0 0;
+    width: 100%;
+    max-width: 340px;
+    padding: 9px;
+    border: 1px solid rgba(141, 247, 193, 0.58);
+    border-radius: 24px;
+    background: rgba(17, 36, 31, 0.74);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3), inset 0 0 28px rgba(141, 247, 193, 0.035);
 }
 
 .portrait-frame::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 70%;
-    height: 75%;
-    border: 1px solid var(--signal);
-    border-radius: var(--radius);
-    content: "";
+    content: none;
 }
 
 .portrait-frame img {
@@ -659,7 +657,7 @@ a {
     z-index: 1;
     width: 100%;
     aspect-ratio: 290 / 388;
-    border-radius: var(--radius);
+    border-radius: 15px;
     object-fit: cover;
     filter: saturate(0.78) contrast(1.03);
 }
@@ -1424,7 +1422,9 @@ a {
     }
 
     .portrait-frame {
-        max-width: 340px;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 7px;
     }
 
     .fact-row {
